@@ -1,0 +1,20 @@
+# Create a kubernetes global service
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: nginx-svc
+  namespace: default
+
+# Spec to include ports slector to connect to the dpeloyment
+spec:
+  ports:
+  - nodePort: 30442 # Range is 30000 - 32768
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  # Defining the selector and label to connec to nginx deployment
+  selector:
+    app: nginx
+  # Creating load balancer type of deployment
+  type: LoadBalancer

@@ -1,0 +1,27 @@
+# K8 works with API versions to declare the resources
+# Need to declare the api version and the type (kind) of service/component
+# Services deployment, services, pods, replicasets, cronjob,auto scaling group, horizontal pod autoscaling group (HPA)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment # naming the deployment
+
+spec:
+  selector:
+    matchLabels:
+      app: nginx # Look for the label to match with k8 service
+
+  # Create a replica set of the aboe with two instances/pods
+  replicas: 2
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+
+    spec:
+      containers:
+      - name: nginx
+        image: jo763/nginx_test2
+        ports:
+        - containerPort: 80
